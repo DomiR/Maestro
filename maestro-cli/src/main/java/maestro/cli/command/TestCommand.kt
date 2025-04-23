@@ -207,7 +207,7 @@ class TestCommand : Callable<Int> {
         TestDebugReporter.install(
             debugOutputPathAsString = debugOutput,
             flattenDebugOutput = flattenDebugOutput,
-            printToConsole = parent?.verbose == true,
+            printToConsole = true,
         )
 
         if (shardSplit != null && shardAll != null) {

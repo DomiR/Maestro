@@ -40,6 +40,7 @@ class ScreenshotUtils {
             driver: Driver,
             timeoutMs: Int? = null
         ): ViewHierarchy {
+            LOGGER.info("Waiting for app to settle")
             var latestHierarchy: ViewHierarchy
             if (timeoutMs != null) {
                 val endTime = System.currentTimeMillis() + timeoutMs
