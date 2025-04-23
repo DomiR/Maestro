@@ -183,7 +183,7 @@ class Maestro(
     ) {
         LOGGER.info("Tapping on element: ${tapRepeat ?: ""} $element")
 
-        val hierarchyBeforeTap = waitForAppToSettle(initialHierarchy, appId, waitToSettleTimeoutMs) ?: initialHierarchy
+        val hierarchyBeforeTap = initialHierarchy
 
         val center = (
                 hierarchyBeforeTap
@@ -334,7 +334,7 @@ class Maestro(
         LOGGER.info("Tapping at ($x, $y) using hierarchy based logic for wait")
 
         val hierarchyBeforeTap = initialHierarchy ?: viewHierarchy()
-        val screenshotBeforeTap: BufferedImage? = ScreenshotUtils.tryTakingScreenshot(driver)
+        val screenshotBeforeTap: BufferedImage? = null;
 
         val retries = getNumberOfRetries(retryIfNoChange)
         repeat(retries) {
@@ -359,7 +359,7 @@ class Maestro(
                 return
             }
 
-            val screenshotAfterTap: BufferedImage? = ScreenshotUtils.tryTakingScreenshot(driver)
+            val screenshotAfterTap: BufferedImage? = null
             if (screenshotBeforeTap != null &&
                 screenshotAfterTap != null &&
                 screenshotBeforeTap.width == screenshotAfterTap.width &&

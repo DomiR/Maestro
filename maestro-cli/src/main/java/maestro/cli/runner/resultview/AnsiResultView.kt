@@ -76,7 +76,7 @@ class AnsiResultView(
         render("\n")
         if (state.onFlowStartCommands.isNotEmpty()) {
             render(" ║\n")
-            render(" ║  > On Flow Start\n")
+            render(" ║  > On Flow Started\n")
             render(" ║\n")
             renderCommands(state.onFlowStartCommands)
         }
@@ -217,28 +217,13 @@ class AnsiResultView(
 
     private fun renderFrame(block: Ansi.() -> Any) {
         renderFrame(StringBuilder().apply {
-            val ansi = Ansi().cursor(0, 0)
+            val ansi = Ansi()
             ansi.block()
             append(ansi)
         }.toString())
     }
 
     private fun renderFrame(frame: String) {
-        // Clear previous frame
-        previousFrame?.let { previousFrame ->
-            val lines = previousFrame.lines()
-            val height = lines.size
-            val width = lines.maxOf { it.length }
-            Ansi.ansi().let { ansi ->
-                ansi.cursor(0, 0)
-                repeat(height) {
-                    ansi.render(" ".repeat(width))
-                    ansi.render("\n")
-                }
-                ansi.cursor(0, 0)
-                println(ansi)
-            }
-        }
         print(frame)
         frames.add(createFrame(frame))
         previousFrame = frame
