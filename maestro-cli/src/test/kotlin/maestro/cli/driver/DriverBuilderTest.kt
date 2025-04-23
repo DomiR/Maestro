@@ -31,6 +31,7 @@ class DriverBuilderTest {
                 teamId = "25CQD4CKK3",
                 derivedDataPath = "driver-iphoneos",
                 sourceCodePath = "driver/ios",
+                sourceCodeRoot = System.getenv("GITHUB_WORKSPACE") ?: System.getProperty("user.home"),
                 cliVersion = CliVersion(1, 40, 0)
             )
         )
@@ -48,9 +49,11 @@ class DriverBuilderTest {
     @Test
     fun `should write error output to file inside _maestro on build failure`() {
         // given
+        val sourceCodeRoot = System.getenv("GITHUB_WORKSPACE") ?: System.getProperty("user.home")
         val driverBuildConfig = mockk<DriverBuildConfig>()
         val processBuilderFactory = mockk<XcodeBuildProcessBuilderFactory>()
         every { driverBuildConfig.sourceCodePath } returns  "mock/source"
+        every { driverBuildConfig.sourceCodeRoot } returns sourceCodeRoot
         every { driverBuildConfig.derivedDataPath } returns  "mock/source"
         every { driverBuildConfig.teamId } returns "mock-team-id"
         every { driverBuildConfig.architectures } returns "arm64"

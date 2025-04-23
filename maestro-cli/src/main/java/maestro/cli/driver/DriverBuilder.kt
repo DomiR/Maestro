@@ -35,7 +35,7 @@ class DriverBuilder(private val processBuilderFactory: XcodeBuildProcessBuilderF
         val driverSourcePath = getDriverSourceFromResources(config)
 
         // Create temporary build directory
-        val workingDirectory = Paths.get(System.getProperty("user.home"), ".maestro")
+        val workingDirectory = Paths.get(config.sourceCodeRoot, ".maestro")
         val buildDir = Files.createDirectories(workingDirectory.resolve("maestro-iphoneos-driver-build")).apply {
             // Cleanup directory before we execute the build
             toFile().deleteRecursively()
